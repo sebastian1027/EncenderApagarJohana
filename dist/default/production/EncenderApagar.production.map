@@ -1,19 +1,19 @@
 MPLINK 5.08, LINKER
-Linker Map File - Created Thu Oct 19 12:19:01 2017
+Linker Map File - Created Thu Oct 19 14:33:24 2017
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x000030
-                   .cinit    romdata   0x000018    program   0x000004
+                   .org_0       code   0x000000    program   0x000050
+                   .cinit    romdata   0x000028    program   0x000004
 
 
 
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000019      
-            26 out of 8455 program addresses used, program memory utilization is 0%
+                            0x000000    0x000029      
+            42 out of 8455 program addresses used, program memory utilization is 0%
 
 
 
@@ -23,16 +23,24 @@ Linker Map File - Created Thu Oct 19 12:19:01 2017
              _.org_0_0010   0x000010    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
              _.org_0_0012   0x000012    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
              _.org_0_0014   0x000014    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
-           inicio_retardo   0x000008    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+             _.org_0_0020   0x000020    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+             _.org_0_0022   0x000022    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+             _.org_0_0024   0x000024    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+                  retardo   0x000008    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+                 retardo2   0x000018    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-           inicio_retardo   0x000008    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+                  retardo   0x000008    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
              _.org_0_0010   0x000010    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
              _.org_0_0012   0x000012    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
              _.org_0_0014   0x000014    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+                 retardo2   0x000018    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+             _.org_0_0020   0x000020    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+             _.org_0_0022   0x000022    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
+             _.org_0_0024   0x000024    program     static E:\DigitalesII\Jhoana\EncenderApagar\main.asm
 
 
