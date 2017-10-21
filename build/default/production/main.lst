@@ -1,11 +1,11 @@
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  1
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00001     list P=16f887
-                      00002     #include "P16f887.inc"
+                      00002     #include "p16f887.inc"
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -16,79 +16,66 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 ;==========================================================================
                       00009 
                       00810         LIST
-                      00003     
+                      00003 
+                      00004 ; CONFIG1
+                      00005 ; __config 0xFFFD
+2007   3FFD           00006  __CONFIG _CONFIG1, _FOSC_INTRC_CLKOUT & _WDTE_ON & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN
+                            _ON & _IESO_ON & _FCMEN_ON & _LVP_ON
+                      00007 ; CONFIG2
+                      00008 ; __config 0xFFFF
+2008   3FFF           00009  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
+                      00010     
 Warning[207]: Found label after column 1. (CONTA_1)
-  00000020            00004     CONTA_1 EQU 0x20
+  00000020            00011     CONTA_1 EQU 0x20        ;variable CONTA_1
 Warning[207]: Found label after column 1. (CONTA_2)
-  00000021            00005     CONTA_2 EQU 0x21
+  00000021            00012     CONTA_2 EQU 0x21        ;variable CONTA_2
 Warning[207]: Found label after column 1. (CONTA_3)
-  00000022            00006     CONTA_3 EQU 0x22
-                      00007  
-                      00008     org 0x00
-0000   0000           00009     nop 
-0001   0000           00010     nop 
-0002   1683           00011     bsf STATUS, RP0     ;banco 1 
-0003   1303           00012     BCF STATUS, RP1
-0004   3000           00013     MOVLW B'00000000'   ;puerto B como salidas
+  00000022            00013     CONTA_3 EQU 0x22        ;variable CONTA_3
+                      00014  
+                      00015     org 0x00
+0000   0000           00016     nop                 ;espera
+0001   0000           00017     nop                 ;espera
+0002   1683           00018     bsf STATUS, RP0     ;Ingresamos al banco 1 
+0003   1303           00019     BCF STATUS, RP1     
+0004   3000           00020     MOVLW B'00000000'   ;Ponemos los 8 pines como salidas 
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0086           00014     MOVWF TRISB         
-0006   1283           00015     BCF STATUS, RP0     ;volver al banco 0
-0007   1303           00016     BCF STATUS, RP1
-                      00017     
-                      00018     
-                      00019     
-                      00020        
+0005   0086           00021     MOVWF TRISB         ;del puerto B
+0006   1283           00022     BCF STATUS, RP0     ;volver al banco 0
+0007   1303           00023     BCF STATUS, RP1
+                      00024     
+Warning[207]: Found label after column 1. (bucle)
+0008                  00025     bucle 
+0008   1406           00026         bsf PORTB, 0    
+0009   2???           00027         call retardo
+000A   1006           00028         bcf PORTB, 0
+000B   2???           00029         call retardo
+000C   2???           00030         goto bucle    
+                      00031     
 Warning[207]: Found label after column 1. (retardo)
-0008                  00021     retardo     ;subrrutina retardo
-                      00022         ;movlw b'00000001'
-                      00023         ;movwf TRISB
-0008   3004           00024         movlw d'4'      ;movemos el valor 4
-0009   00A2           00025         movwf CONTA_3   ;movemos el valor a CONTA_1
-000A   30FA           00026         movlw d'250'    ;movemos el valor 250
-000B   00A1           00027         movwf CONTA_2   ;movemos el valor a CONTA_2
-000C   30FA           00028         movlw d'250'            ;movemos el valor 250
-000D   00A0           00029         movwf CONTA_1   ;movemos el valor a CONTA_3
-000E   0000           00030         nop                     ;retardo de 1 uS
-000F   0BA0           00031         decfsz CONTA_1, f       ;decrementa CONTA_1 en 1,(CONTA_1 - 1) si es 0 salta
-0010   2???           00032         goto $-.2               ;se devuleve 2 lineas
-0011   0BA1           00033         decfsz CONTA_2, F       ;decrementa CONTA_2 en 1,(CONTA_2 - 1) si es 0 salta
-0012   2???           00034         goto $-.6               ;Se devuelve 6 lineas
-0013   0BA2           00035         decfsz CONTA_3, F       ;decrementa CONTA_3 en 1,(CONTA_3 - 1) si es 0 salta
-0014   2???           00036         goto $-.8               ;Se devuelve 8 lineas
-0015   3000           00037         movlw b'00000000'       ;apagamos el led
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  2
+000D                  00032     retardo     ;subrrutina retardo     
+000D   3004           00033         movlw d'4'      ;movemos el valor 4
+000E   00A2           00034         movwf CONTA_3   ;movemos el valor a CONTA_1
+000F   30FA           00035         movlw d'250'    ;movemos el valor 250
+0010   00A1           00036         movwf CONTA_2   ;movemos el valor a CONTA_2
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0016   0086           00038         movwf TRISB             ;ubicado en el puerto B
-0017   2???           00039         goto retardo2   ;va a la subrrutina 2
-                      00040     
-Warning[207]: Found label after column 1. (retardo2)
-0018                  00041     retardo2
-0018   3004           00042         movlw d'4'      ;movemos el valor 4
-0019   00A2           00043         movwf CONTA_3   ;movemos el valor a CONTA_1
-001A   30FA           00044         movlw d'250'    ;movemos el valor 250
-001B   00A1           00045         movwf CONTA_2   ;movemos el valor a CONTA_2
-001C   30FA           00046         movlw d'250'            ;movemos el valor 250
-001D   00A0           00047         movwf CONTA_1   ;movemos el valor a CONTA_3
-001E   0000           00048         nop                     ;retardo de 1 uS
-001F   0BA0           00049         decfsz CONTA_1, f       ;decrementa CONTA_1 en 1,(CONTA_1 - 1) si es 0 salta
-0020   2???           00050         goto $-.2               ;se devuleve 2 lineas
-0021   0BA1           00051         decfsz CONTA_2, F       ;decrementa CONTA_2 en 1,(CONTA_2 - 1) si es 0 salta
-0022   2???           00052         goto $-.6               ;Se devuelve 6 lineas
-0023   0BA2           00053         decfsz CONTA_3, F       ;decrementa CONTA_3 en 1,(CONTA_3 - 1) si es 0 salta
-0024   2???           00054         goto $-.8               ;Se devuelve 8 lineas
-0025   30FF           00055         movlw b'11111111'       ;apagamos el led
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0026   0086           00056         movwf TRISB             ;ubicado en el puerto B
-0027   2???           00057         goto retardo    ;va a la subrrutina 2
-                      00058         
-Warning[205]: Found directive in column 1. (end)
-                      00059 end                     ;finaliza el programa 
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  3
+0011   30FA           00037         movlw d'250'            ;movemos el valor 250
+0012   00A0           00038         movwf CONTA_1   ;movemos el valor a CONTA_3
+0013   0000           00039         nop                     ;retardo de 1 uS
+0014   0BA0           00040         decfsz CONTA_1, f       ;decrementa CONTA_1 en 1,(CONTA_1 - 1) si es 0 salta
+0015   2???           00041         goto $-.2               ;se devuleve 2 lineas
+0016   0BA1           00042         decfsz CONTA_2, F       ;decrementa CONTA_2 en 1,(CONTA_2 - 1) si es 0 salta
+0017   2???           00043         goto $-.6               ;Se devuelve 6 lineas
+0018   0BA2           00044         decfsz CONTA_3, F       ;decrementa CONTA_3 en 1,(CONTA_3 - 1) si es 0 salta
+0019   2???           00045         goto $-.10              ;Se devuelve 8 lineas
+001A   3400           00046         retlw 00
+                      00047         
+3FFD 3FFF             00048    end                  ;finaliza el programa 
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  3
 
 
 SYMBOL TABLE
@@ -147,7 +134,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  4
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  4
 
 
 SYMBOL TABLE
@@ -206,7 +193,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  5
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  5
 
 
 SYMBOL TABLE
@@ -265,7 +252,7 @@ INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  6
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  6
 
 
 SYMBOL TABLE
@@ -324,7 +311,7 @@ PCL                               00000002
 PCLATH                            0000000A
 PCON                              0000008E
 PDC0                              00000000
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  7
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  7
 
 
 SYMBOL TABLE
@@ -383,7 +370,7 @@ RBIF                              00000000
 RC0                               00000000
 RC1                               00000001
 RC2                               00000002
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  8
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  8
 
 
 SYMBOL TABLE
@@ -442,7 +429,7 @@ SSPADD                            00000093
 SSPBUF                            00000013
 SSPCON                            00000014
 SSPCON2                           00000091
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE  9
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE  9
 
 
 SYMBOL TABLE
@@ -501,7 +488,7 @@ TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE 10
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE 10
 
 
 SYMBOL TABLE
@@ -560,7 +547,7 @@ TX9D                              00000000
 TXD8                              00000000
 TXEN                              00000005
 TXIE                              00000004
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE 11
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE 11
 
 
 SYMBOL TABLE
@@ -605,12 +592,9 @@ WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
-_.org_0_0010                      00000010
-_.org_0_0012                      00000012
-_.org_0_0014                      00000014
-_.org_0_0020                      00000020
-_.org_0_0022                      00000022
-_.org_0_0024                      00000024
+_.org_0_0015                      00000015
+_.org_0_0017                      00000017
+_.org_0_0019                      00000019
 _BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
@@ -619,15 +603,15 @@ _BOREN_NSLEEP                     00003EFF
 _BOREN_OFF                        00003CFF
 _BOREN_ON                         00003FFF
 _BOREN_SBODEN                     00003DFF
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE 12
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_BOR_NSLEEP                       00003EFF
-_BOR_OFF                          00003CFF
-_BOR_ON                           00003FFF
 _BOR_SBODEN                       00003DFF
 _CONFIG1                          00002007
 _CONFIG2                          00002008
@@ -678,20 +662,20 @@ _WDT_ON                           00003FFF
 _WRT_1FOURTH                      00003BFF
 _WRT_256                          00003DFF
 _WRT_HALF                         000039FF
-MPASM 5.75                          MAIN.ASM   10-19-2017  14:33:23         PAGE 13
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FF9
+__16F887                          00000001
+MPASM 5.75                          MAIN.ASM   10-20-2017  11:57:38         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_WRT_OFF                          00003FFF
-_XT_OSC                           00003FF9
-__16F887                          00000001
-retardo                           00000008
-retardo2                          00000018
+bucle                             00000008
+retardo                           0000000D
 
 Errors   :     0
-Warnings :     6 reported,     0 suppressed
-Messages :     3 reported,     0 suppressed
+Warnings :     5 reported,     0 suppressed
+Messages :     1 reported,     0 suppressed
 
 

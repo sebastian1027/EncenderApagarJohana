@@ -1,9 +1,6 @@
-Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 4 : Found label after column 1. (CONTA_1)
-Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 5 : Found label after column 1. (CONTA_2)
-Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 6 : Found label after column 1. (CONTA_3)
-Message[302] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 14 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 21 : Found label after column 1. (retardo)
-Message[302] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 41 : Found label after column 1. (retardo2)
-Message[302] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 56 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[205] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 59 : Found directive in column 1. (end)
+Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 11 : Found label after column 1. (CONTA_1)
+Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 12 : Found label after column 1. (CONTA_2)
+Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 13 : Found label after column 1. (CONTA_3)
+Message[302] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 21 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 25 : Found label after column 1. (bucle)
+Warning[207] E:\DIGITALESII\JHOANA\ENCENDERAPAGAR\MAIN.ASM 32 : Found label after column 1. (retardo)
